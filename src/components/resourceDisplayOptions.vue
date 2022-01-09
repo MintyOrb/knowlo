@@ -2,22 +2,22 @@
   <div >
     <div class="row container">
 				<!-- <span class="col items-start viewBtn" :class="{'fade': !showViewed}" ><i class="material-icons ">remove_red_eye</i>
-          <q-tooltip :disable="!this.$q.localStorage.get('showToolTips')" :delay="500" :offset="[0, 5]">show / hide viewed resources</q-tooltip>
+          <q-tooltip :disable="!this.$q.localStorage.getItem('showToolTips')" :delay="500" :offset="[0, 5]">show / hide viewed resources</q-tooltip>
         </span> -->
 
         <!-- display options select -->
         <span class="">
           <q-btn class="viewBtn"  flat round @click.stop.prevent="display = 'list'"><i class="material-icons">view_list</i>
-           <!-- <q-tooltip :disable="!this.$q.localStorage.get('showToolTips')" :delay="500" :offset="[0, 5]">List view</q-tooltip> -->
+           <q-tooltip :disable="!$q.localStorage.getItem('showToolTips')" :delay="500" :offset="[0, 5]">List view</q-tooltip>
           </q-btn>
            <q-btn class="viewBtn"  flat round @click.stop.prevent="display = 'slider'"><i class="material-icons">view_array</i>
-           <!-- <q-tooltip :disable="!this.$q.localStorage.get('showToolTips')" :delay="500" :offset="[0, 5]">Slider view</q-tooltip> -->
+           <q-tooltip :disable="!this.$q.localStorage.getItem('showToolTips')" :delay="500" :offset="[0, 5]">Slider view</q-tooltip>
           </q-btn>
           <q-btn class="viewBtn" flat round  @click.stop.prevent="display = 'card'"><i class="material-icons">dashboard</i>
-           <!-- <q-tooltip :disable="!this.$q.localStorage.get('showToolTips')" :delay="500" :offset="[0, 5]">Grid view</q-tooltip> -->
+           <q-tooltip :disable="!this.$q.localStorage.getItem('showToolTips')" :delay="500" :offset="[0, 5]">Grid view</q-tooltip>
           </q-btn>
           <q-btn class="viewBtn" flat round  ><i class="material-icons">photo_size_select_large</i>
-            <!-- <q-tooltip :disable="!this.$q.localStorage.get('showToolTips')" :delay="500" :offset="[0, 5]">Resize</q-tooltip> -->
+            <q-tooltip :disable="!this.$q.localStorage.getItem('showToolTips')" :delay="500" :offset="[0, 5]">Resize</q-tooltip>
             <q-popup-edit class="" v-model="sizePopup" cover >
               <q-slider class='sizeSlider' @mouseup.prevent="" v-model="size" :min="1" :max="20" :step="1" reverse />
               <!-- <q-btn round>hi</q-btn> -->
@@ -31,7 +31,7 @@
             <q-btn-dropdown auto-close color="primary" flat dropdown-icon="none">
               <template v-slot:label>
                   {{orderby}}
-                  <!-- <q-tooltip :disable="!$q.localStorage.get('showToolTips')" :delay="500" :offset="[0, 5]">Change Resource Order</q-tooltip> -->
+                  <q-tooltip :disable="!$q.localStorage.getItem('showToolTips')" :delay="500" :offset="[0, 5]">Change Resource Order</q-tooltip>
               </template> 
               <q-list>
                 <q-item clickable @click.prevent="orderby = 'quality'">
@@ -60,7 +60,7 @@
               <q-btn flat round @click.prevent="descending == 'true'?descending = 'false' :descending = 'true'">
                 <i class="material-icons ascDec" :class="{'flipVert': descending == 'false' }">
                   sort
-                  <!-- <q-tooltip :disable="!$q.localStorage.get('showToolTips')" :delay="500" :offset="[0, 5]">Ascending / Descending</q-tooltip> -->
+                  <q-tooltip :disable="!$q.localStorage.getItem('showToolTips')" :delay="500" :offset="[0, 5]">Ascending / Descending</q-tooltip>
                 </i>
               </q-btn>
           </span>

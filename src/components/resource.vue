@@ -34,13 +34,13 @@
       'margin20': display==='thumb' || display==='list' ,
       'inline mb': display==='list'}"
 			>
-			<router-link @click='selected' :to="{ name: 'resourceSub', params: { uid: re.resource.uid }}">
+			<router-link @click='selected' :to="{ name: 'r'}">
 				<img @click.stop='selected' :src="re.resource.mThumb" />
 			</router-link>
       <q-input v-if="editing" :model="re.resource.mThumb" float-label="Thumbnail URL" type='url'/>
       <q-input v-if="editing" :model="re.resource.url" float-label="URL" type='url' />
 		</div>
-		<router-link @click='selected' v-if="re.resource.text && re.resource.text.length > 0 && display =='thumb'" :to="{ name: 'resourceSub', params: { uid: re.resource.uid }}">
+		<router-link @click='selected' v-if="re.resource.text && re.resource.text.length > 0 && display =='thumb'" :to="{ name: 'r'}">
 			<div class="margin20 hoverable thumb">
 				<span >{{re.resource.text.substring(0,5)}}...</span>
 			</div>
@@ -50,7 +50,7 @@
       'truncate inline tmargin titleText': display === 'list',
       'card-content': display === 'card'}"
 			>
-			<router-link v-show='!editing' @click='selected' :to="{ name: 'resourceSub', params: { uid: re.resource.uid }}">
+			<router-link v-show='!editing' @click='selected' :to="{ name: 'r'}">
 				<span v-if="size < 6" :class="{'title': display === 'card'}">{{re.resource.title}}</span>
 			</router-link>
       <q-input v-if="editing" :model="re.resource.title" float-label="Title" type='textarea'/>
@@ -64,7 +64,7 @@
     :class="{
     'titleText truncate': display === 'list' && $route.name != 'tag'}"
     >
-			<router-link @click='selected' :to="{ name: 'resourceSub', params: { uid: re.resource.uid }}">
+			<router-link @click='selected' :to="{ name: 'r'}">
 				{{re.resource.text.substring(0,300)}}
 			</router-link>
 		</div>

@@ -1,22 +1,17 @@
 <template>
     <q-page>
         <splitpanes class="default-theme panes" horizontal>
-            <pane size="50">
+            <pane size="50" class="rPane">
                 <resource-display-options
                     @update-order="updateOrder"
                     @update-display="updateDisplay"
                     @update-size="updateSize"
                     @update-descending="updateDescending"
                 ></resource-display-options> 
-                <resource-collection ref='collection' :resources="resources" :options="collectionOptions"></resource-collection>
-                <template v-slot:loading>
-                    <div class="row justify-center q-my-md">
-                        <q-spinner color="primary" size="40px" />
-                    </div>
-                </template>
+                 <resource-collection ref='collection' :resources="resources" :options="collectionOptions"></resource-collection>
             </pane>
             <pane size="50" class="gPane">
-                <graphNav ></graphNav>   
+                <graphNav></graphNav>   
             </pane>
         </splitpanes>
     </q-page>
@@ -35,7 +30,88 @@ export default defineComponent({
     data() {
         return {
             tagQuery: this.$q.localStorage.getItem('tagQuery') || [],
-            resources: [],
+            resources: [
+                {
+                    title: 'hi',
+                    text: 'test',
+                    subtitle: 'ummmm',
+                    uid: 1,
+                    resource: {
+                        uid: 1
+                    }
+                },
+                {
+                    title: 'hi',
+                    text: 'test',
+                    subtitle: 'ummmm',
+                    uid: 1,
+                    resource: {
+                        uid: 3
+                    }
+                },
+                {
+                    title: 'hi',
+                    text: 'test',
+                    subtitle: 'ummmm',
+                    uid: 1,
+                    resource: {
+                        uid: 4
+                    }
+                },
+                {
+                    title: 'hi',
+                    text: 'test',
+                    subtitle: 'ummmm',
+                    uid: 1,
+                    resource: {
+                        uid: 5
+                    }
+                },
+                {
+                    title: 'hi',
+                    text: 'test',
+                    subtitle: 'ummmm',
+                    uid: 1,
+                    resource: {
+                        uid: 6
+                    }
+                },
+                {
+                    title: 'hi',
+                    text: 'test',
+                    subtitle: 'ummmm',
+                    uid: 1,
+                    resource: {
+                        uid: 7
+                    }
+                },
+                {
+                    title: 'hi',
+                    text: 'test',
+                    subtitle: 'ummmm',
+                    uid: 1,
+                    resource: {
+                        uid: 8
+                    }
+                },
+                {
+                    title: 'hi',
+                    text: 'test',
+                    subtitle: 'ummmm',
+                    uid: 1,
+                    resource: {
+                        uid: 9
+                    }
+                },
+                {
+                    title: 'two',
+                    text: 'hi again',
+                    uid: 2,
+                    resource: {
+                        uid: 2
+                    }
+                }
+            ],
             resourceQueryOptions: {
                 include: [],
                 exclude: [],
@@ -101,7 +177,36 @@ export default defineComponent({
                 options['nodes'] = node
             }
             this.$refs.network.fit(options)
-        }
+        },
+        updateDisplay(x){
+            this.$q.localStorage.set('exploreDisplay', x)
+            this.collectionOptions.display = x
+        },
+        updateOrder(x){
+            this.$q.localStorage.set('exploreOrder', x)
+            this.collectionOptions.order = x
+            this.resourceQueryOptions.order = x
+            if(!this.noMore){ 
+                this.fetchResources()
+            }
+        },
+        updateSize(size){
+          
+            this.collectionOptions.size = size
+           setTimeout(() => { // wait for change
+                this.$refs.collection.layout()
+                this.$q.localStorage.set('exploreSize', size)
+            }, 300)
+            
+        },
+        updateDescending(x){
+            this.$q.localStorage.set('exploreDescending', x)
+            this.collectionOptions.descending = x
+            this.resourceQueryOptions.descending = x
+            if(!this.noMore){ 
+                this.fetchResources()
+            }
+        }   
     }
 })
 </script>
@@ -112,5 +217,12 @@ export default defineComponent({
     }
     .gPane {
         position: relative; width: 100%; height: 100%;
+    }
+    .rPane {
+        overflow-y: scroll;
+    }
+    .iso > div {
+        height: 100px;
+        width: 200px;
     }
 </style>

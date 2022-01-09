@@ -28,7 +28,7 @@
 
 import resource from 'components/resource'
 import crossSection from 'components/cross-section'
-import isotope from 'vueisotope'
+import isotope from 'components/vue_isotope'
 import imagesLoaded from 'vue-images-loaded'
 
 export default {
