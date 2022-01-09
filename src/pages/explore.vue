@@ -2,7 +2,12 @@
     <q-page>
         <splitpanes class="default-theme panes" horizontal>
             <pane size="50">
-                <div >hi</div>   
+                <resource-display-options
+                    @update-order="updateOrder"
+                    @update-display="updateDisplay"
+                    @update-size="updateSize"
+                    @update-descending="updateDescending"
+                ></resource-display-options> 
             </pane>
             <pane size="50" class="gPane">
                 <graphNav ></graphNav>   
@@ -16,9 +21,11 @@ import { defineComponent } from 'vue';
 import graphNav from 'components/graphNav'
 import { Splitpanes, Pane } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
+import resourceDisplayOptions from 'components/resourceDisplayOptions'
+// import resourceCollection from 'components/resourceCollection'
 
 export default defineComponent({
-    components: { Splitpanes, Pane, graphNav },
+    components: { Splitpanes, Pane, graphNav, resourceDisplayOptions, },
     data() {
         return {
             nodes: [
