@@ -18,7 +18,9 @@
     "vis-data": "^7.1.2",
     "vis-network": "^9.1.0",
     "vis-util": "^5.0.2",
-    "vue-flickity": "^1.2.1"
+    "vue-flickity": "^1.2.1",
+    "vue-images-loaded": "^1.1.2",
+    "vueisotope": "^3.1.2"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.14",

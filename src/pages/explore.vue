@@ -8,6 +8,12 @@
                     @update-size="updateSize"
                     @update-descending="updateDescending"
                 ></resource-display-options> 
+                <resource-collection ref='collection' :resources="resources" :options="collectionOptions"></resource-collection>
+                <template v-slot:loading>
+                    <div class="row justify-center q-my-md">
+                        <q-spinner color="primary" size="40px" />
+                    </div>
+                </template>
             </pane>
             <pane size="50" class="gPane">
                 <graphNav ></graphNav>   
@@ -22,12 +28,30 @@ import graphNav from 'components/graphNav'
 import { Splitpanes, Pane } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
 import resourceDisplayOptions from 'components/resourceDisplayOptions'
-// import resourceCollection from 'components/resourceCollection'
+import resourceCollection from 'components/resourceCollection'
 
 export default defineComponent({
-    components: { Splitpanes, Pane, graphNav, resourceDisplayOptions, },
+    components: { Splitpanes, Pane, graphNav, resourceDisplayOptions, resourceCollection },
     data() {
         return {
+            tagQuery: this.$q.localStorage.getItem('tagQuery') || [],
+            resources: [],
+            resourceQueryOptions: {
+                include: [],
+                exclude: [],
+                skip: 0,
+                limit: 30, // base on resources per row and mobile v desktop (i.e. available screen real estate)?
+                order: this.$q.localStorage.getItem('exploreOrder') || 'quality',
+                descending: this.$q.localStorage.getItem('exploreDescending') || 'true'
+            },
+            infinite: false, // flag indicating if resources should be concatenated or replaced
+            noMore: false, // flag for no more related resources
+            collectionOptions:{
+                order: this.$q.localStorage.getItem('exploreOrder') || 'Quality',
+                display: this.$q.localStorage.getItem('exploreDisplay') || 'card',
+                size: this.$q.localStorage.getItem('exploreSize') || 4,
+                descending: this.$q.localStorage.getItem('exploreDescending') || 'true',
+            },
             nodes: [
                 {id: 1,  label: 'circle',  shape: 'circle' },
                 {id: 2,  label: 'ellipse', shape: 'ellipse'},
