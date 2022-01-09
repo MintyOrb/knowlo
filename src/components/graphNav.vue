@@ -104,4 +104,9 @@ export default defineComponent({
     margin-bottom: -35px;
     z-index: 3;
   }
+  .net {
+    position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px;
+  }
+  .splitpanes--vertical > .splitpanes__splitter:before {left: -30px;right: -30px;height: 100%;}
+  .splitpanes--horizontal > .splitpanes__splitter:before {top: -30px;bottom: -30px;width: 100%;}
 </style>

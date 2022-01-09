@@ -4,7 +4,7 @@
             <pane size="50">
                 <div >hi</div>   
             </pane>
-            <pane size="50">
+            <pane size="50" class="gPane">
                 <graphNav ></graphNav>   
             </pane>
         </splitpanes>
@@ -76,8 +76,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
-   .panes {
-       height: calc(100vh - 50px);;
-       max-height: 100%;
-   }
+    .panes {
+        height: calc(100vh - 50px);
+    }
+    .gPane {
+        position: relative; width: 100%; height: 100%;
+    }
 </style>
