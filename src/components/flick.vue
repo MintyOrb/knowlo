@@ -22,6 +22,11 @@ export default {
     this.$flickity = null;
   },
 
+  updated(x,y) {
+    console.log(x,y)
+    this.rerender()
+  },
+
   methods: {
     /**
      * Initialize a new flickity and emit init event.

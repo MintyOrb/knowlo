@@ -7,7 +7,7 @@
     </div>
 </template>
 <script>
-import { defineComponent, h } from 'vue';
+import { defineComponent } from 'vue';
 var Isotope = require("isotope-layout");
 export default defineComponent ({
     props: ['items'],
