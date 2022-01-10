@@ -64,7 +64,6 @@ export default {
     },
     methods: {
         selectItem (selected) {     
-            console.log(this.$refs.itemContainer)
             this.$refs.itemContainer.selectCell( selected )
         },
         updateSliderPosition (index) {

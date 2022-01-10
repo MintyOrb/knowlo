@@ -1,7 +1,8 @@
 <template>
     <q-page>
         <splitpanes class="default-theme panes" horizontal>
-            <pane size="50" class="rPane">
+            <pane size="50" class="rPane" :class="{ hideOverflow: collectionOptions.display == 'slider' }">
+                <q-btn @click.prevent="add">add</q-btn>
                 <resource-display-options
                     @update-order="updateOrder"
                     @update-display="updateDisplay"
@@ -166,6 +167,18 @@ export default defineComponent({
         }
     },
     methods: {
+        add(){
+            this.resources.push({
+                    title: 'hi',
+                    text: 'test',
+                    subtitle: 'ummmm',
+                    uid: this.resources.length+1,
+                    resource: {
+                        mThumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Operation_Upshot-Knothole_-_Badger_001.jpg/1058px-Operation_Upshot-Knothole_-_Badger_001.jpg',
+                        uid:  this.resources.length+1
+                    }
+                })
+        },
         updateDisplay(x){
             this.$q.localStorage.set('exploreDisplay', x)
             this.collectionOptions.display = x
@@ -179,12 +192,8 @@ export default defineComponent({
             }
         },
         updateSize(size){
-          
             this.collectionOptions.size = size
-           setTimeout(() => { // wait for change
-                this.$refs.collection.layout()
-                this.$q.localStorage.set('exploreSize', size)
-            }, 300)
+            this.$q.localStorage.set('exploreSize', size)
             
         },
         updateDescending(x){
@@ -207,11 +216,15 @@ export default defineComponent({
         position: relative; width: 100%; height: 100%;
     }
     .rPane {
-        overflow-y: scroll;
         position: relative; width: 100%; height: 100%;
+        overflow-y: scroll;
     }
     .iso div {
         height: 100px;
         width: 200px;
+    }
+
+    .hideOverflow {
+        overflow: hidden;
     }
 </style>

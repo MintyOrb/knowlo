@@ -11,14 +11,14 @@
         </cross-section>
 
         <!-- card and list view -->
-        <isotope v-else ref="resourceBin" :list="resources" v-images-loaded:on.progress="layout" :options="getOptions()">
+        <iso v-else ref="resourceBin" :items="resources" >
             <resource v-for="res in resources"
                 :size="options.size"
                 :display="options.display"
                 :key="res.resource.uid"
                 :re="res"
             ></resource>
-        </isotope>
+        </iso>
     
 
     </div>
@@ -28,24 +28,13 @@
 
 import resource from 'components/resource'
 import crossSection from 'components/cross-section'
-import isotope from 'components/vue3iso'
+import iso from 'components/isotopeLayout'
 import imagesLoaded from 'vue-images-loaded'
 
 export default {
-    components: { resource, crossSection, isotope },
+    components: { resource, crossSection, iso },
     directives: { imagesLoaded },
     props: ['tagQuery', 'resources', 'options'],
-    watch: {
-        descending: function(x) {
-            this.order(x)
-        },
-        sort: function(x) {
-            this.order(x)
-        },
-        size: function(x) {
-            this.layout()
-        }
-    },
     methods: {
         getOptions() {
             return {
@@ -73,17 +62,6 @@ export default {
                 }
             }
         },
-        order(){ // reorder without db query
-            // this.$refs.resourceBin.options.sortAscending = !this.options.descending
-            // // this.opt.sortAscending = !this.options.descending
-            // // this.$refs.resourceBin.updateSortData()
-            // this.$refs.resourceBin.sort(this.sort)
-        },
-        layout() {
-            if(this.$refs.resourceBin){
-                this.$refs.resourceBin.layout('masonry')
-            }
-        }
     }
 
 }
