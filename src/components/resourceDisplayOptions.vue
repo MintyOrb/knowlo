@@ -18,8 +18,8 @@
           </q-btn>
           <q-btn class="viewBtn" flat round  ><i class="material-icons">photo_size_select_large</i>
             <q-tooltip :disable="!this.$q.localStorage.getItem('showToolTips')" :delay="500" :offset="[0, 5]">Resize</q-tooltip>
-            <q-popup-edit class="" v-model="sizePopup" cover >
-              <q-slider class='sizeSlider' @mouseup.prevent="" v-model="size" :min="1" :max="20" :step="1" reverse />
+            <q-popup-edit class="pop" v-model="sizePopup" cover >
+              <q-slider class='sizeSlider' markers @mouseup.prevent="" v-model="size" :min="1" :max="20" :step="1" reverse />
               <!-- <q-btn round>hi</q-btn> -->
             </q-popup-edit>
           </q-btn>
@@ -119,9 +119,15 @@ export default {
 }
 </script>
 
-<style  >
-.sizeSlider .q-slider__track {
-    width: 0!important;
+<style >
+.pop {
+    height: 28px;
+    top: 46px;
+    overflow: hidden;
+}
+/* hide progress bar on slider  */
+.q-slider__track-container--h .q-slider__selection {
+    visibility: hidden;
 }
 .q-item__section {
   text-transform: capitalize;

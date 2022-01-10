@@ -37,6 +37,7 @@ export default defineComponent({
                     subtitle: 'ummmm',
                     uid: 1,
                     resource: {
+                        mThumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Operation_Upshot-Knothole_-_Badger_001.jpg/1058px-Operation_Upshot-Knothole_-_Badger_001.jpg',
                         uid: 1
                     }
                 },
@@ -46,6 +47,7 @@ export default defineComponent({
                     subtitle: 'ummmm',
                     uid: 1,
                     resource: {
+                        mThumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Operation_Upshot-Knothole_-_Badger_001.jpg/1058px-Operation_Upshot-Knothole_-_Badger_001.jpg',
                         uid: 3
                     }
                 },
@@ -55,6 +57,7 @@ export default defineComponent({
                     subtitle: 'ummmm',
                     uid: 1,
                     resource: {
+                        mThumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Operation_Upshot-Knothole_-_Badger_001.jpg/1058px-Operation_Upshot-Knothole_-_Badger_001.jpg',
                         uid: 4
                     }
                 },
@@ -64,6 +67,7 @@ export default defineComponent({
                     subtitle: 'ummmm',
                     uid: 1,
                     resource: {
+                        mThumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Operation_Upshot-Knothole_-_Badger_001.jpg/1058px-Operation_Upshot-Knothole_-_Badger_001.jpg',
                         uid: 5
                     }
                 },
@@ -73,6 +77,7 @@ export default defineComponent({
                     subtitle: 'ummmm',
                     uid: 1,
                     resource: {
+                        mThumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Operation_Upshot-Knothole_-_Badger_001.jpg/1058px-Operation_Upshot-Knothole_-_Badger_001.jpg',
                         uid: 6
                     }
                 },
@@ -82,6 +87,7 @@ export default defineComponent({
                     subtitle: 'ummmm',
                     uid: 1,
                     resource: {
+                        mThumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Operation_Upshot-Knothole_-_Badger_001.jpg/1058px-Operation_Upshot-Knothole_-_Badger_001.jpg',
                         uid: 7
                     }
                 },
@@ -91,6 +97,7 @@ export default defineComponent({
                     subtitle: 'ummmm',
                     uid: 1,
                     resource: {
+                        mThumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Operation_Upshot-Knothole_-_Badger_001.jpg/1058px-Operation_Upshot-Knothole_-_Badger_001.jpg',
                         uid: 8
                     }
                 },
@@ -100,6 +107,7 @@ export default defineComponent({
                     subtitle: 'ummmm',
                     uid: 1,
                     resource: {
+                        mThumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Operation_Upshot-Knothole_-_Badger_001.jpg/1058px-Operation_Upshot-Knothole_-_Badger_001.jpg',
                         uid: 9
                     }
                 },
@@ -149,35 +157,15 @@ export default defineComponent({
             ],
             options: {
                 nodes: {
-                borderWidth: 4
+                    borderWidth: 4
                 },
                 edges: {
-                color: 'lightgray'
+                    color: 'lightgray'
                 }
             }
         }
     },
     methods: {
-        add(){
-            let x=0
-            while( x < 10 ){
-                x+=1
-                let num = this.nodes.length + 2
-                this.nodes.push({
-                id: num,  label: num.toString(),  shape: 'circle',
-                })
-            }
-            // this.edges.push({
-            //   from: 6, to: 8
-            // })
-        },
-        fit(node){
-            let options = {animation: true}
-            if(Array.isArray(node)){
-                options['nodes'] = node
-            }
-            this.$refs.network.fit(options)
-        },
         updateDisplay(x){
             this.$q.localStorage.set('exploreDisplay', x)
             this.collectionOptions.display = x
@@ -220,8 +208,9 @@ export default defineComponent({
     }
     .rPane {
         overflow-y: scroll;
+        position: relative; width: 100%; height: 100%;
     }
-    .iso > div {
+    .iso div {
         height: 100px;
         width: 200px;
     }

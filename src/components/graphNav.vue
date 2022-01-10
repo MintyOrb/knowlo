@@ -4,7 +4,6 @@
       <q-btn @click="add">add</q-btn>
       <q-btn @click="fit">fit</q-btn>
       <q-btn @click="fit([3])">fit3</q-btn>
-      <q-btn @click="size">size</q-btn>
       <!-- <q-btn @click="remove">remove</q-btn>
       <q-btn @click="reset">reset</q-btn>
       <q-btn @click="fit">fit</q-btn>
@@ -92,9 +91,6 @@ export default defineComponent({
         options['nodes'] = node
       }
       this.$refs.network.fit(options)
-    },
-    size(){
-      this.$refs.network.setSize("100%","100%")
     }
   }
 })

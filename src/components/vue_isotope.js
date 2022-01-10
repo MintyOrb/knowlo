@@ -1,4 +1,3 @@
-import { h, reactive } from 'vue'
 (function () {
   function buildVueIsotope(_, Isotope) {
     function addClass(node, classValue) {
@@ -37,7 +36,7 @@ import { h, reactive } from 'vue'
 
       props,
 
-      render() {
+      render(h) {
         const map = {}
         const prevChildren = this.prevChildren = this.children
         const rawChildren = this.$slots.default || []
@@ -45,7 +44,7 @@ import { h, reactive } from 'vue'
         const removedIndex = this.removedIndex = []
 
         // rawChildren.forEach(elt => addClass(elt, this.itemSelector))
-         Array.prototype.forEach.call(rawChildren, elt => {
+        Array.prototype.forEach.call(rawChildren, elt => {
           addClass(elt, this.itemSelector)
         });
 

@@ -28,7 +28,7 @@
 
 import resource from 'components/resource'
 import crossSection from 'components/cross-section'
-import isotope from 'components/vue_isotope'
+import isotope from 'components/vue3iso'
 import imagesLoaded from 'vue-images-loaded'
 
 export default {
@@ -51,19 +51,19 @@ export default {
             return {
                 sortAscending: false,
                 getSortData: {
-                    quality: function(res) {
-                        return res.globalVote.quality 
-                    },
-                    complexity: function(res) {
-                        return res.globalVote.complexity
-                    },
-                    added: function(res) {
-                        return res.resource.dateAdded 
-                    },
+                    // quality: function(res) {
+                    //     return res.globalVote.quality || 0
+                    // },
+                    // complexity: function(res) {
+                    //     return res.globalVote.complexity || 0
+                    // },
+                    // added: function(res) {
+                    //     return res.resource.dateAdded || 'unknown'
+                    // },
                     votes: 'votes',
-                    views: function(res) {
-                        return res.resource.viewCount 
-                    },
+                    // views: function(res) {
+                    //     return res.resource.viewCount || 'nan'
+                    // },
                     // 'activity': function(res) {
                     //     return res. 
                     // },

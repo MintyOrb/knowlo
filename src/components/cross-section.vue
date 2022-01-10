@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class='crossSection'>
     <flick 
         class='itemContainer' 
         ref='itemContainer' 
@@ -12,14 +12,14 @@
         
     </flick> 
 
-    <q-slider id='slider' class='cs-slider' v-model="slide" :min="0" :max="items.length - 1" @input="selectItem" />
+    <q-slider id='slider' class='cs-slider' markers v-model="slide" :min="0" :max="items.length - 1" @update:model-value="selectItem" />
   </div>
     
 </template>
 
 <script>
 import flick from 'components/flick'
-
+import { ref } from 'vue'
 export default {
     name: 'cross-section',
     components: {flick},
@@ -52,7 +52,7 @@ export default {
 
     data () {
         return {
-            slide: 0,
+            slide: ref(0),
             itemContainer: {
                 friction: .3,
                 selectedAttraction: this.$q.platform.is.mobile? .05 : .028, // faster snap on mobile
@@ -64,6 +64,7 @@ export default {
     },
     methods: {
         selectItem (selected) {     
+            console.log(this.$refs.itemContainer)
             this.$refs.itemContainer.selectCell( selected )
         },
         updateSliderPosition (index) {
@@ -76,10 +77,19 @@ export default {
 </script>
 
 <style>
-
+.crossSection {
+    position: absolute;
+    top: 35px;
+    right: 0px;
+    bottom: 35px;
+    left: 0px;
+}
 .itemContainer {
     height: 100%;
     width: 100%;
+}
+.flickity-viewport {
+    height: 100%!important; 
 }
 
 
@@ -105,21 +115,18 @@ export default {
 } */
 
 #slider {
+    display: flex;
     width: 80%;
     margin: 0 auto;
-    bottom: 40px;
+    bottom: 10px;
     background-color: #ffffff82;
-    /* opacity: 20%; */
     border-radius: 20px;
-    /* padding-left: 20px; */
-    /* padding-right: 20px; */
+    padding-left: 20px;
+    padding-right: 20px;
+    
 }
 /* hide progress bar on slider  */
-.cs-slider .q-slider__track {
-    width: 0!important;
-}
-
-template {
-    height: 100%;
+.q-slider__track-container--h .q-slider__selection {
+    visibility: hidden;
 }
 </style>
