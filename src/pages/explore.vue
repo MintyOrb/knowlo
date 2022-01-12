@@ -1,6 +1,6 @@
 <template>
     <q-page>
-        <splitpanes class="default-theme panes" :horizontal='horiz'>
+        <splitpanes class="default-theme panes" :horizontal='horiz' @resized="layout" >
             <pane size="50" class="rPane" :class="{ hideOverflow: collectionOptions.display == 'slider' }">
                 
                 <resource-display-options
@@ -9,13 +9,14 @@
                     @update-size="updateSize"
                     @update-descending="updateDescending"
                 ></resource-display-options>
-                <resource-collection ref='collection' :resources="resources" :options="collectionOptions"></resource-collection>
                 <q-btn @click.prevent="add">add</q-btn>
-                <q-btn @click.prevent="horiz = !horiz">orientation</q-btn>
+                <q-btn @click.prevent="orient">orientation</q-btn>
+                <resource-collection ref='collection' :resources="resources" :options="collectionOptions"></resource-collection>
+                
             </pane>
             <pane size="50" class="gPane">
-                <q-btn @click.prevent="addg" style='z-index: 10'>addgg</q-btn>
-                <graphNav :graph='network'></graphNav>   
+                <q-btn @click.prevent="addg" style='z-index: 10'>add 10</q-btn>
+                <graphNav ref='graph' :graph='network'></graphNav>   
             </pane>
         </splitpanes>
     </q-page>
@@ -29,11 +30,45 @@ import 'splitpanes/dist/splitpanes.css'
 import resourceDisplayOptions from 'components/resourceDisplayOptions'
 import resourceCollection from 'components/resourceCollection'
 
+import size from '../data/size.js'
+let resources = require ('../data/resources.json')
+
 export default defineComponent({
     components: { Splitpanes, Pane, graphNav, resourceDisplayOptions, resourceCollection },
+    mounted() {
+        this.network.nodes = []
+        this.network.nodes.push({
+                    id: size['properties']['english'],
+                    shape: "circularImage",
+                    image: '',
+                    brokenImage: '',
+                    label: size['properties']['english'],
+            })
+        for (let x in size.properties.contains) {
+            this.network.nodes.push({
+                    id: size['properties']['contains'][x]['properties']['english'],
+                    shape: "circularImage",
+                    image: size['properties']['contains'][x]['properties']['url'],
+                    brokenImage: 'https://cdn0.iconfinder.com/data/icons/interface-set-vol-2/50/No_data_No_info_Missing-512.png',
+                    label: size['properties']['contains'][x]['properties']['english'],
+            })
+            this.network.edges.push({
+                from: size['properties']['contains'][x]['properties']['english'],
+                to: 'Size'
+            })
+        }
+        this.resources = []
+        for (let x in resources){
+            this.resources.push({
+                uid: resources[x]['r']['properties']['uid'],
+                resource: resources[x]['r']['properties']
+            })
+        }
+
+    },
     data() {
         return {
-            horiz: 'true',
+            horiz: true,
             tagQuery: this.$q.localStorage.getItem('tagQuery') || [],
             resources: [
                 {
@@ -173,20 +208,26 @@ export default defineComponent({
         }
     },
     methods: {
+        orient() {
+            this.horiz = !this.horiz
+            this.$nextTick(function () {
+                this.layout()
+                this.$refs.graph.fit()
+            })
+        },
+        layout(x){       
+            this.$refs.collection.layout()
+        },
         addg(){
-      let x=0
-      while( x < 10 ){
-        x+=1
-        let num = this.network.nodes.length + 2
-        this.network.nodes.push({
-          id: num,  label: num.toString(),  shape: 'circle',
-        })
-      }
-     
-      // this.edges.push({
-      //   from: 6, to: 8
-      // })
-    },
+            let x=0
+            while( x < 10 ){
+                x+=1
+                let num = this.network.nodes.length + 2
+                this.network.nodes.push({
+                id: num,  label: num.toString(),  shape: 'circle',
+                })
+            }
+        },
         add(){
             this.resources.push({
                     title: 'hi',
@@ -202,14 +243,19 @@ export default defineComponent({
         updateDisplay(x){
             this.$q.localStorage.set('exploreDisplay', x)
             this.collectionOptions.display = x
+            if (this.$q.localStorage.getItem('exploreDisplay') == 'slider'){
+                this.collectionOptions.size = 2
+            } else {
+                this.collectionOptions.size = this.$q.localStorage.getItem('exploreDisplay')
+            }
         },
         updateOrder(x){
             this.$q.localStorage.set('exploreOrder', x)
             this.collectionOptions.order = x
             this.resourceQueryOptions.order = x
-            if(!this.noMore){ 
-                this.fetchResources()
-            }
+            // if(!this.noMore){ 
+            //     this.fetchResources()
+            // }
         },
         updateSize(size){
             this.collectionOptions.size = size
@@ -220,9 +266,9 @@ export default defineComponent({
             this.$q.localStorage.set('exploreDescending', x)
             this.collectionOptions.descending = x
             this.resourceQueryOptions.descending = x
-            if(!this.noMore){ 
-                this.fetchResources()
-            }
+            // if(!this.noMore){ 
+            //     this.fetchResources()
+            // }
         }   
     }
 })

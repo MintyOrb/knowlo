@@ -23,7 +23,6 @@ export default {
   },
 
   updated(x,y) {
-    console.log(x,y)
     this.rerender()
   },
 

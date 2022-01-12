@@ -1,13 +1,13 @@
 <template>
-    <div>
-    <q-btn @click.prevent="layout('masonry')">test</q-btn>
-    <div class='bin'>
+    <div >
+    <div class='bin' >
         <slot />
     </div>
     </div>
 </template>
 <script>
 import { defineComponent } from 'vue';
+
 var Isotope = require("isotope-layout");
 export default defineComponent ({
     props: ['items'],
@@ -31,9 +31,11 @@ export default defineComponent ({
           if (name) {
             layout = { layoutMode: name }
           }
-          this.iso.arrange(layout)
-          this.$emit("layout", layout)
-        },
+          if (this.iso){
+              this.iso.arrange(layout)
+            this.$emit("layout", layout)
+          }
+        }        
     },
     watch: {
         options: {

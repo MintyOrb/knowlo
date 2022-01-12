@@ -78,7 +78,7 @@ export default {
 <style>
 .crossSection {
     position: absolute;
-    top: 35px;
+    top: 55px;
     right: 0px;
     bottom: 35px;
     left: 0px;

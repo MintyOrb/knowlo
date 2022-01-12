@@ -13,6 +13,7 @@
         <!-- card and list view -->
         <iso v-else ref="resourceBin" :items="resources" >
             <resource v-for="res in resources"
+                @imgLoaded='layout'
                 :size="options.size"
                 :display="options.display"
                 :key="res.resource.uid"
@@ -29,13 +30,16 @@
 import resource from 'components/resource'
 import crossSection from 'components/cross-section'
 import iso from 'components/isotopeLayout'
-import imagesLoaded from 'vue-images-loaded'
 
 export default {
     components: { resource, crossSection, iso },
-    directives: { imagesLoaded },
     props: ['tagQuery', 'resources', 'options'],
     methods: {
+        layout(){
+            if(this.$refs.resourceBin){
+                this.$refs.resourceBin.layout()
+            }
+        },
         getOptions() {
             return {
                 sortAscending: false,

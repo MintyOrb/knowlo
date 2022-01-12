@@ -1,12 +1,12 @@
 <template>
-  <div >
+  <div  class="selection shadow-3">
     <div class="row container">
 				<!-- <span class="col items-start viewBtn" :class="{'fade': !showViewed}" ><i class="material-icons ">remove_red_eye</i>
           <q-tooltip :disable="!this.$q.localStorage.getItem('showToolTips')" :delay="500" :offset="[0, 5]">show / hide viewed resources</q-tooltip>
         </span> -->
 
         <!-- display options select -->
-        <span class="">
+        <span>
           <q-btn class="viewBtn"  flat round @click.stop.prevent="display = 'list'"><i class="material-icons">view_list</i>
            <q-tooltip :disable="!$q.localStorage.getItem('showToolTips')" :delay="500" :offset="[0, 5]">List view</q-tooltip>
           </q-btn>
@@ -31,7 +31,7 @@
             <q-btn-dropdown auto-close color="primary" flat dropdown-icon="none">
               <template v-slot:label>
                   {{orderby}}
-                  <q-tooltip :disable="!$q.localStorage.getItem('showToolTips')" :delay="500" :offset="[0, 5]">Change Resource Order</q-tooltip>
+                  <q-tooltip :disable="!$q.localStorage.getItem('showToolTips')" :delay="500" :offset="[0, 5]">Order by ______</q-tooltip>
               </template> 
               <q-list>
                 <q-item clickable @click.prevent="orderby = 'quality'">
@@ -57,7 +57,7 @@
                 </q-item>
               </q-list>         
             </q-btn-dropdown>
-              <q-btn flat round @click.prevent="descending == 'true'?descending = 'false' :descending = 'true'">
+              <q-btn flat round @click.prevent="descending == 'true'?descending = 'false' :descending = 'true'" class='viewBtn'>
                 <i class="material-icons ascDec" :class="{'flipVert': descending == 'false' }">
                   sort
                   <q-tooltip :disable="!$q.localStorage.getItem('showToolTips')" :delay="500" :offset="[0, 5]">Ascending / Descending</q-tooltip>
@@ -153,5 +153,15 @@ export default {
 
 .q-popup-edit {
   width: 70%;
+}
+
+.viewBtn{
+  font-size: 20px;
+}
+.selection {
+    top: 0px;
+    background-color: white;
+    position: sticky;
+    z-index: 50;
 }
 </style>

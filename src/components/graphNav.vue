@@ -1,9 +1,8 @@
 <template>
   <div class="flex flex-center g">
     <div class='testbs'>
-      <q-btn @click="add">add</q-btn>
       <q-btn @click="fit">fit</q-btn>
-      <q-btn @click="fit([3])">fit3</q-btn>
+      <q-btn @click="fit(['Physics'])">fit physics</q-btn>
       <!-- <q-btn @click="remove">remove</q-btn>
       <q-btn @click="reset">reset</q-btn>
       <q-btn @click="fit">fit</q-btn>
