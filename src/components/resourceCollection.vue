@@ -21,6 +21,14 @@
             ></resource>
         </iso>
     
+        <!-- cross section view -->
+        <!-- <cross-section v-if="options.display=='cross section'">
+            <div v-for="step in resources" :key="res.resource.uid">
+                <div>header thing</div>
+                <iso>
+                </iso>
+            </div>
+        </cross-section> -->
 
     </div>
 </template>

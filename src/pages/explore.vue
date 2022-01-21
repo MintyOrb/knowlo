@@ -1,5 +1,6 @@
 <template>
     <q-page>
+        <timeline :items="titems" :groups="tgroups"></timeline>
         <splitpanes class="default-theme panes" :horizontal='horiz' @resized="layout" >
             <pane size="50" class="rPane" :class="{ hideOverflow: collectionOptions.display == 'slider' }">
                 
@@ -16,7 +17,7 @@
             </pane>
             <pane size="50" class="gPane">
                 <q-btn @click.prevent="addg" style='z-index: 10'>add 10</q-btn>
-                <graphNav ref='graph' :graph='network'></graphNav>   
+                <graphNav ref='graph' :graph='network' @node-selected="test"></graphNav>   
             </pane>
         </splitpanes>
     </q-page>
@@ -29,12 +30,13 @@ import { Splitpanes, Pane } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
 import resourceDisplayOptions from 'components/resourceDisplayOptions'
 import resourceCollection from 'components/resourceCollection'
+import timeline from 'components/vis-timeline'
 
 import size from '../data/size.js'
 let resources = require ('../data/resources.json')
 
 export default defineComponent({
-    components: { Splitpanes, Pane, graphNav, resourceDisplayOptions, resourceCollection },
+    components: { Splitpanes, Pane, graphNav, resourceDisplayOptions, resourceCollection, timeline },
     mounted() {
         this.network.nodes = []
         this.network.nodes.push({
@@ -58,6 +60,7 @@ export default defineComponent({
             })
         }
         this.resources = []
+        console.log(resources[0])
         for (let x in resources){
             this.resources.push({
                 uid: resources[x]['r']['properties']['uid'],
@@ -68,6 +71,19 @@ export default defineComponent({
     },
     data() {
         return {
+            tgroups: [
+			    {id: 'a1', content:'Group one'},
+			    {id: 'a2', content:'Group two'},
+			    {id: 'a3', content:'Group three'}
+			],
+			titems: [
+			    {id: 1, content: 'item 1', start: '2014-04-20'},
+                {id: 2, content: 'item 2', start: '2014-04-14'},
+                {id: 3, content: 'item 3', start: '2014-04-18'},
+                {id: 4, content: 'item 4', start: '2014-04-16', end: '2014-04-19'},
+                {id: 5, content: 'item 5', start: '2014-04-25'},
+                {id: 6, content: 'item 6', start: '2014-04-27', type: 'point'}
+			],
             horiz: true,
             tagQuery: this.$q.localStorage.getItem('tagQuery') || [],
             resources: [
@@ -208,6 +224,15 @@ export default defineComponent({
         }
     },
     methods: {
+        test(tag) {
+            console.log(tag.nodes[0])
+            for(let res in this.resources) {
+                if (!(tag.nodes[0] in this.resources[res].tags)) { // if doesn't contain tag
+                    this.resources.splice(res,1) // index, how many
+                }
+            }
+            
+        },
         orient() {
             this.horiz = !this.horiz
             this.$nextTick(function () {

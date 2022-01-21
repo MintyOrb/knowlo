@@ -22,6 +22,7 @@
         :nodes="this.graph.nodes"
         :edges="this.graph.edges"
         :options="this.graph.options"
+        @select-node="nodeSelected"
       >
       </network>   
   </div>
@@ -44,12 +45,14 @@ export default defineComponent({
   },
   methods: {
     fit(node){
-    
       let options = {animation: true}
       if(Array.isArray(node)){
         options['nodes'] = node
       }
       this.$refs.network.fit(options)
+    },
+    nodeSelected(node){
+      this.$emit('node-selected',node)
     }
   }
 })

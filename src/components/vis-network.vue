@@ -1,4 +1,4 @@
-// this is from https://github.com/r3code/vue-vis-network/
+// this is lightly modified from https://github.com/shri-bhat/vue-visjs-timeline
 <template>
     <div ref="visualization"></div>
 </template>

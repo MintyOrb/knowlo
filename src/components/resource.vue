@@ -220,6 +220,7 @@ export default {
   font-size: 15px;
 }
 .list {
+    outline: 1px solid #80808038;
     background-color: white;
     padding: .5% 1% 1% 2%;
     width: 94%;

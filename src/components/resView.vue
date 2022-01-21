@@ -9,7 +9,7 @@
       <div class="video-container ">
         <iframe :src="'https://youtube.com/embed/'+ytID+'?rel=0&autoplay=1'"  frameborder=”0″ allowfullscreen></iframe>
       </div>
-
+    
       <!-- <vue-plyr>
         <div data-plyr-provider="youtube" :data-plyr-embed-id="resource.ytID"></div>
       </vue-plyr> -->

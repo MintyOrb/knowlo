@@ -10,6 +10,7 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
+    "@coddicat/vue-pinch-scroll-zoom": "^3.2.1",
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
@@ -19,9 +20,12 @@
     "splitpanes": "^3.0.6",
     "vis-data": "^7.1.2",
     "vis-network": "^9.1.0",
+    "vis-timeline": "^7.5.0",
     "vis-util": "^5.0.2",
     "vue-flickity": "^1.2.1",
     "vue-images-loaded": "^1.1.2",
+    "vue-pinch-zoom": "^1.0.1",
+    "vue-zoomer": "^0.3.9",
     "vueisotope": "^3.1.2"
   },
   "devDependencies": {
