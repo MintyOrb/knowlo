@@ -46,7 +46,7 @@ export default defineComponent({
                     brokenImage: '',
                     label: size['properties']['english'],
             })
-        for (let x in size.properties.contains) {
+        for (let x in size.properties.contains) {    
             this.network.nodes.push({
                     id: size['properties']['contains'][x]['properties']['english'],
                     shape: "circularImage",
@@ -225,6 +225,7 @@ export default defineComponent({
     },
     methods: {
         test(tag) {
+            console.log(tag)
             console.log(tag.nodes[0])
             for(let res in this.resources) {
                 if (!(tag.nodes[0] in this.resources[res].tags)) { // if doesn't contain tag

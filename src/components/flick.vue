@@ -36,8 +36,18 @@ export default {
         this.$emit('change', index)
       })
       this.$emit('init', this.$flickity);
-    },
 
+      // scroll wheel nav
+      this.$el.onwheel = e => {
+         e.preventDefault();
+         var direction = (Math.abs(e.deltaX) > Math.abs(e.deltaY)) ? e.deltaX : e.deltaY;        
+        if (direction > 0) {
+          this.$flickity.next();
+        } else {
+          this.$flickity.previous();
+        }
+      }
+    },
     /**
      * Return the current flickity instance to access directly
      *
