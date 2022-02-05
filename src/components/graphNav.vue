@@ -52,7 +52,10 @@ export default defineComponent({
       this.$refs.network.fit(options)
     },
     nodeSelected(node){
-      this.$emit('node-selected',node)
+      let fullNode = this.$refs.network.getNode(node['nodes'][0])
+      let canvasPosition = this.$refs.network.getPositions(node['nodes'][0])
+      let DOMPosition = this.$refs.network.canvasToDom(canvasPosition[node['nodes'][0]])
+      this.$emit('node-selected', fullNode, DOMPosition)
     }
   }
 })

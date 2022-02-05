@@ -17,6 +17,7 @@
             </pane>
             <pane size="50" class="gPane">
                 <q-btn @click.prevent="addg" style='z-index: 10'>add 10</q-btn>
+                <radial-menu ref='radialMenu'></radial-menu>
                 <graphNav ref='graph' :graph='network' @node-selected="test"></graphNav>   
             </pane>
         </splitpanes>
@@ -31,12 +32,12 @@ import 'splitpanes/dist/splitpanes.css'
 import resourceDisplayOptions from 'components/resourceDisplayOptions'
 import resourceCollection from 'components/resourceCollection'
 import timeline from 'components/vis-timeline'
-
+import RadialMenu from 'components/RadialMenu'
 import size from '../data/size.js'
 let resources = require ('../data/resources.json')
 
 export default defineComponent({
-    components: { Splitpanes, Pane, graphNav, resourceDisplayOptions, resourceCollection, timeline },
+    components: { Splitpanes, Pane, graphNav, resourceDisplayOptions, resourceCollection, timeline, RadialMenu },
     mounted() {
         this.network.nodes = []
         this.network.nodes.push({
@@ -49,6 +50,8 @@ export default defineComponent({
         for (let x in size.properties.contains) {    
             this.network.nodes.push({
                     id: size['properties']['contains'][x]['properties']['english'],
+                    title: size['properties']['contains'][x]['properties']['english'],
+                    uid: size['properties']['contains'][x]['properties']['uid'],
                     shape: "circularImage",
                     image: size['properties']['contains'][x]['properties']['url'],
                     brokenImage: 'https://cdn0.iconfinder.com/data/icons/interface-set-vol-2/50/No_data_No_info_Missing-512.png',
@@ -60,7 +63,6 @@ export default defineComponent({
             })
         }
         this.resources = []
-        console.log(resources[0])
         for (let x in resources){
             this.resources.push({
                 uid: resources[x]['r']['properties']['uid'],
@@ -224,14 +226,22 @@ export default defineComponent({
         }
     },
     methods: {
-        test(tag) {
-            console.log(tag)
-            console.log(tag.nodes[0])
-            for(let res in this.resources) {
-                if (!(tag.nodes[0] in this.resources[res].tags)) { // if doesn't contain tag
-                    this.resources.splice(res,1) // index, how many
-                }
-            }
+        test(tag, position) {
+            console.log(this.$refs.radialMenu)
+            // this.$refs.radialMenu.style=`visibilityy:visible; position: absolute!important; z-index:3; top: ${position.y}px; left: ${position.x}px;`
+                      
+
+            // console.log(document.getElementsByClassName("radialMenu"))
+            let dude = document.getElementsByClassName("menu")
+            dude[0].style=`visibilityy:visible; position: absolute!important; z-index:3; top: ${position.y}px; left: ${position.x}px; padding:0px;`
+            // this.$refs.radialMenu.style.top = position.y- + 'px'
+            // this.$refs.radialMenu.style.left = position.x + 'px'
+ this.$refs.radialMenu.expand()
+            // for(let res in this.resources) {
+            //     if (!(tag.nodes[0] in this.resources[res].tags)) { // if doesn't contain tag
+            //         this.resources.splice(res,1) // index, how many
+            //     }
+            // }
             
         },
         orient() {

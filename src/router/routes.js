@@ -11,7 +11,7 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/explore.vue') }
+      { path: '', component: () => import('src/pages/test-sandbox.vue') }
     ]
   },
   {
