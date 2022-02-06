@@ -1,5 +1,5 @@
 <template>
-  <div  class="selection shadow-3">
+  <div id='options'  class="selection shadow-3" :class="{ 'selection--hidden': !showNavbar }">
     <div class="row container">
 				<!-- <span class="col items-start viewBtn" :class="{'fade': !showViewed}" ><i class="material-icons ">remove_red_eye</i>
           <q-tooltip :disable="!this.$q.localStorage.getItem('showToolTips')" :delay="500" :offset="[0, 5]">show / hide viewed resources</q-tooltip>
@@ -87,6 +87,8 @@ export default {
       descending: this.$q.localStorage.getItem('exploreDescending') || 'true',
       sizePopup: null,
       showViewed: true,
+      showNavbar: true,
+      lastScrollPosition: 0
     }
   },
   watch: {
@@ -112,7 +114,24 @@ export default {
         timeout: 1500,
         position: 'bottom-left',
       })
+    },
+    onScroll(){ // functionality guided by https://medium.com/@Taha_Shashtari/hide-navbar-on-scroll-down-in-vue-fb85acbdddfe
+      const currentScrollPosition = document.getElementById("options").offsetTop
+      if (currentScrollPosition < 0) {
+        return
+      }
+      if (Math.abs(currentScrollPosition - this.lastScrollPosition) < 60) {
+        return
+      }
+      this.showNavbar = currentScrollPosition < this.lastScrollPosition
+      this.lastScrollPosition = currentScrollPosition
     }
+  },
+  mounted () {
+    document.getElementById("options").parentElement.addEventListener('scroll', this.onScroll)
+  },
+  beforeUnmount () {
+    document.getElementById("options").parentElement.removeEventListener('scroll', this.onScroll)
   }
 
 
@@ -159,9 +178,16 @@ export default {
   font-size: 20px;
 }
 .selection {
-    top: 0px;
-    background-color: white;
-    position: sticky;
-    z-index: 50;
+  top: 0px;
+  background-color: white;
+  position: sticky;
+  z-index: 50;
+  box-shadow: 0 2px 15px rgba(71, 120, 120, 0.5);
+  transform: translate3d(0, 0, 0);
+  transition: 0.1s all ease-out;
+}
+.selection.selection--hidden {
+  box-shadow: none;
+  transform: translate3d(0, -100%, 0);
 }
 </style>

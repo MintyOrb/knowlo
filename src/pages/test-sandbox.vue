@@ -1,6 +1,6 @@
 <template>
     <q-page>
-        <timeline :items="titems" :groups="tgroups"></timeline>
+        <!-- <timeline :items="titems" :groups="tgroups"></timeline> -->
         <splitpanes class="default-theme panes" :horizontal='horiz' @resized="layout" >
             <pane size="50" class="rPane" :class="{ hideOverflow: collectionOptions.display == 'slider' }">
                 
@@ -37,7 +37,7 @@ import size from '../data/size.js'
 let resources = require ('../data/resources.json')
 
 export default defineComponent({
-    components: { Splitpanes, Pane, graphNav, resourceDisplayOptions, resourceCollection, timeline, RadialMenu },
+    components: { Splitpanes, Pane, graphNav, resourceDisplayOptions, resourceCollection, RadialMenu },
     mounted() {
         this.network.nodes = []
         this.network.nodes.push({
